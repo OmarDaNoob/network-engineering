@@ -1,4 +1,5 @@
 import pexpect
+import os
 ip_address = "192.168.56.101"
 username = "cisco"
 password = "cisco123!"
@@ -46,6 +47,7 @@ print('_______________________________________')
 # Terminates SSH
 session.close()
 
+#saving both configs on our machine
 with open(ip_address + '_startup_config','w') as file:
     for line in start_config:
         file.write(line+'\n')
@@ -53,4 +55,8 @@ print('')
 with open(ip_address + '_running_config','w') as file:
     for line in running_config:
         file.write(line+'\n')
+#comparing the two configs using the diff command
+start_conf_file   = ip_address + '_startup_config'
+running_conf_file = ip_address + '_running_config'
+os.system('diff' + start_conf_file + ' ' + running_conf_file)
 exit()
