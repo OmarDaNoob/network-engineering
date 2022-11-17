@@ -58,5 +58,11 @@ with open(ip_address + '_running_config','w') as file:
 #comparing the two configs using the diff command
 start_conf_file   = ip_address + '_startup_config'
 running_conf_file = ip_address + '_running_config'
+#saving the comparision on a file on our local machine
 os.system('diff ' + start_conf_file + ' ' + running_conf_file + ' > ' + ip_address + '_comparison.txt')
+
+#change the name to any file we want to compare with
+local_file_name   = 'any_file.txt'
+
+os.system('diff ' + local_file_name + ' ' + running_conf_file + ' > ' + ip_address + '_LocalComparison.txt')
 exit()
