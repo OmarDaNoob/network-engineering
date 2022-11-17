@@ -26,11 +26,11 @@ session.expect('#')
 
 session.sendline('show run')
 session.expect('#')
-running_conf=session.before.splitlines()
+running_config=session.before.splitlines()
 
 session.sendline('show start')
 session.expect('#')
-start_conf=session.before.splitlines()
+start_config=session.before.splitlines()
 #exit enable mode
 session.sendline('exit')
 #get a sucess message if works
@@ -43,8 +43,9 @@ print('')
 print('_______________________________________')
 # Terminates SSH
 session.close()
-
-print(start_conf)
+for line in start_config:
+    print(line)
 print('')
-print(running_conf)
+for line in running_config:
+    print(line)
 exit()
