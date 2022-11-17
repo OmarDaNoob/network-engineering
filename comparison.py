@@ -4,33 +4,33 @@ username = "cisco"
 password = "cisco123!"
 # Create the SSH session
 session = pexpect.spawn('ssh ' + username + '@' + ip_address,encoding='utf-8', timeout=20)
-result = session.expect(['[password:', pexpect.TIMEOUT, pexpect.EOF])
+session.expect('Password:')
 
 session.sendline(password)
-result=session.expect('#')
+session.expect('#')
 
 #change host name
 session.sendline('conf t')
-result=session.expect('\(config\)')
+session.expect('\(config\)')
 
 session.sendline('hostname R1')
-result=session.expect('R1')
+session.expect('R1')
 
 #exit config
 session.sendline('exit')
-result=session.expect('#')
+session.expect('#')
 
 #copy running conf and startup conf
 session.sendline('terminal length 0')
-result=session.expect('#')
+session.expect('#')
 
 session.sendline('show run')
+session.expect('#')
 running_conf=session.before.splitlines()
-result=session.expect('#')
 
 session.sendline('show start')
+session.expect('#')
 start_conf=sesion.before.splitlines()
-result=session.expect('#')
 #exit enable mode
 session.sendline('exit')
 #get a sucess message if works
