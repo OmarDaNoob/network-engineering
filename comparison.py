@@ -30,7 +30,7 @@ running_conf=session.before.splitlines()
 
 session.sendline('show start')
 session.expect('#')
-start_conf=sesion.before.splitlines()
+start_conf=session.before.splitlines()
 #exit enable mode
 session.sendline('exit')
 #get a sucess message if works
