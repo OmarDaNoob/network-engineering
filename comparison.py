@@ -26,6 +26,7 @@ session.expect('#')
 
 session.sendline('show run')
 session.expect('#')
+session.expect('#')
 running_config=session.before.splitlines()
 
 session.sendline('show start')
