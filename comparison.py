@@ -25,6 +25,7 @@ session.sendline('terminal length 0')
 session.expect('#')
 
 session.sendline('show run')
+#no idea why 2 expects are needed, but without it it doesnt work  :p
 session.expect('#')
 session.expect('#')
 running_config=session.before.splitlines()
@@ -44,9 +45,12 @@ print('')
 print('_______________________________________')
 # Terminates SSH
 session.close()
-for line in start_config:
-    print(line)
+
+with open(ip_address + '_startup_config','w') as file:
+    for line in start_config:
+        file.write(line+'\n')
 print('')
-for line in running_config:
-    print(line)
+with open(ip_address + '_running_config','w') as file:
+    for line in running_config:
+        file.write(line+'\n')
 exit()
